@@ -83,7 +83,6 @@ function Form() {
     const handleSubmitAlertDataForm = (event) => {
         event.preventDefault();
         const curp = generateCURP();
-        // Agregar los datos del formulario al estado en lugar de mostrar una alerta
         setFormData([...formData, { curp, nombre, apellidoPaterno, apellidoMaterno, dia, mes, ano, sexo, estado }]);
         Swal.fire({
             title: 'Enviado!',
@@ -121,7 +120,11 @@ function Form() {
     const handleYearChange = (e) => {
         const year = e.target.value;
         if (year > 2024) {
-            Swal.fire('Error', "Year can't be greater than 2024", 'error');
+            Swal.fire('Error', "No puede ser mayor del 2024", 'error');
+            return;
+        }
+        if (year < 2000) {
+            Swal.fire('Error', "No puede ser menor del 2000", 'error');
             return;
         }
         setAno(year);
